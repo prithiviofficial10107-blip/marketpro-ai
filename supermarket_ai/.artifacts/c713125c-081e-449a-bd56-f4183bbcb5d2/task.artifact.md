@@ -1,0 +1,4 @@
+- [x] Update `ai.py` with modern OpenAI client syntax and improved prompt
+- [x] Remove redundant `get_ai_answer` from `database.py`
+- [x] Verify AI functionality with a test script
+- [ ] Create walkthrough

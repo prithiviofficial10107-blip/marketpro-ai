@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Supermarket AI Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="d-flex">
+      <aside class="sidebar text-white p-4">
+        <h3 class="fw-bold mb-4">Supermarket AI</h3>
+        <div class="mb-4">
+          <button id="themeToggle" class="btn btn-outline-light btn-sm">🌙 Dark Mode</button>
+        </div>
+        <p class="text-light-emphasis">Smart stock, billing, and insights in one place.</p>
+        <ul class="nav flex-column gap-2">
+          <li><a href="#dashboard" class="nav-link text-white">Dashboard</a></li>
+          <li><a href="#stock" class="nav-link text-white">Stock Management</a></li>
+          <li><a href="#billing" class="nav-link text-white">Billing</a></li>
+          <li><a href="#assistant" class="nav-link text-white">AI Assistant</a></li>
+          <li><a href="#charts" class="nav-link text-white">Charts</a></li>
+        </ul>
+      </aside>
+
+      <main class="flex-grow-1 p-4">
+        <section id="dashboard" class="mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h2 class="fw-bold mb-1">Supermarket Dashboard</h2>
+              <p class="text-muted">Overview of stock, sales, and revenue.</p>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-blue">
+                <div class="card-body">
+                  <h6 class="text-muted">Total Products</h6>
+                  <h3 id="totalProducts">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-blue">
+                <div class="card-body">
+                  <h6 class="text-muted">Total Categories</h6>
+                  <h3 id="totalCategories">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-blue">
+                <div class="card-body">
+                  <h6 class="text-muted">Total Stock</h6>
+                  <h3 id="totalStock">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-warning">
+                <div class="card-body">
+                  <h6 class="text-muted">Low Stock Products</h6>
+                  <h3 id="lowStockProducts">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-warning">
+                <div class="card-body">
+                  <h6 class="text-muted">Today's Sales</h6>
+                  <h3 id="todaysSales">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0 card-success">
+                <div class="card-body">
+                  <h6 class="text-muted">Total Revenue</h6>
+                  <h3 id="totalRevenue">0</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="stock" class="mb-4">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold mb-0">Stock Management</h4>
+                    <input id="productSearch" class="form-control w-50" placeholder="Search product" />
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Category</th>
+                          <th>Price</th>
+                          <th>Stock</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="productsTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h4 class="fw-bold mb-3">Add / Update Product</h4>
+                  <form id="productForm">
+                    <input type="hidden" id="productId" />
+                    <div class="mb-2">
+                      <label class="form-label">Name</label>
+                      <input class="form-control" id="productName" required />
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Category</label>
+                      <select class="form-select" id="productCategory"></select>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Supplier</label>
+                      <select class="form-select" id="productSupplier"></select>
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Price</label>
+                      <input type="number" step="0.01" class="form-control" id="productPrice" required />
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Stock</label>
+                      <input type="number" class="form-control" id="productStock" />
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Barcode</label>
+                      <input class="form-control" id="productBarcode" />
+                    </div>
+                    <div class="mb-2">
+                      <label class="form-label">Description</label>
+                      <textarea class="form-control" id="productDescription"></textarea>
+                    </div>
+                    <button class="btn btn-primary w-100" type="submit">Save Product</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="billing" class="mb-4">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h4 class="fw-bold mb-3">Billing</h4>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Product</label>
+                      <select class="form-select" id="billingProduct"></select>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Quantity</label>
+                      <input type="number" class="form-control" id="billingQuantity" value="1" min="1" />
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                      <button type="button" class="btn btn-success w-100" id="addBillingItem">Add</button>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <ul id="billItems" class="list-group"></ul>
+                  </div>
+                  <div class="mt-3 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">Total: <span id="billTotal">0</span></h5>
+                    <button type="button" class="btn btn-primary" id="generateBill">Generate Bill</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h4 class="fw-bold mb-3">Billing Summary</h4>
+                  <div id="billingMessage" class="alert alert-info">Select products and generate a bill.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="assistant" class="mb-4">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h4 class="fw-bold mb-3">AI Assistant</h4>
+              <div class="mb-3">
+                <textarea id="aiQuestion" class="form-control" rows="2" placeholder="Ask anything in English, Tamil, or Tanglish. Example: How many products? Rice stock? What is AI?"></textarea>
+              </div>
+              <button class="btn btn-primary" id="askAI">
+                <span id="aiLoadingSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                Ask AI
+              </button>
+              <div class="mt-3 p-3 rounded bg-light" id="aiAnswer">Ask a question and get a response like a general AI assistant or from this supermarket project.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="charts" class="mb-4">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h5 class="fw-bold">Stock by Category</h5>
+                  <canvas id="stockChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h5 class="fw-bold">Monthly Sales</h5>
+                  <canvas id="salesChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h5 class="fw-bold">Top Products</h5>
+                  <canvas id="topProductsChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

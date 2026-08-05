@@ -1,0 +1,79 @@
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #15253f;
+  --muted: #6c757d;
+  --primary: #2563eb;
+  --accent: #0f172a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --primary: #3b82f6;
+  --accent: #60a5fa;
+}
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1d4ed8, #0f172a);
+}
+
+.card {
+  background: var(--card);
+  color: var(--text);
+}
+
+.card-blue {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.card-warning {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+}
+
+.card-success {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+}
+
+body.dark .card-blue {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+}
+
+body.dark .card-warning {
+  background: linear-gradient(135deg, #92400e, #f59e0b);
+  color: white;
+}
+
+body.dark .card-success {
+  background: linear-gradient(135deg, #166534, #22c55e);
+  color: white;
+}
+
+.table thead {
+  background: #eff6ff;
+}
+
+body.dark .table thead {
+  background: #1e293b;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+  .d-flex {
+    flex-direction: column;
+  }
+}

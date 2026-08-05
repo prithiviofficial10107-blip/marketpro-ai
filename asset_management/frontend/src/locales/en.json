@@ -1,0 +1,84 @@
+{
+  "sidebar": {
+    "dashboard": "Store Insights",
+    "billing": "Billing POS",
+    "inventory": "Product Stock",
+    "staff": "Team Directory",
+    "wastage": "Wastage Tracker",
+    "procurement": "Procurement",
+    "notifications": "Activity Center",
+    "reports": "Analytics & Reports",
+    "audit": "Audit Trail",
+    "settings": "Settings",
+    "signout": "Sign Out",
+    "light_mode": "Light Mode",
+    "dark_mode": "Dark Mode",
+    "nav_reports": "Reports",
+    "nav_analytics": "Analytics"
+  },
+  "common": {
+    "search_placeholder": "Quick search...",
+    "filters": "Filters",
+    "export": "Export",
+    "new_sku": "New SKU",
+    "add_personnel": "Add Personnel",
+    "log_wastage": "Log New Wastage",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "no_records": "No records found matching your criteria.",
+    "actions": "Actions",
+    "status": "Status"
+  },
+  "dashboard": {
+    "title": "Store Insights",
+    "subtitle": "Operational Health & Real-time Metrics",
+    "available": "Available",
+    "assigned": "Assigned",
+    "monthly_sales": "Monthly Sales",
+    "damaged": "Damaged",
+    "staff_count": "Staff Count"
+  },
+  "billing": {
+    "title": "Store POS",
+    "subtitle": "Real-time Billing Terminal",
+    "cart": "Current Cart",
+    "items": "ITEMS",
+    "subtotal": "Subtotal",
+    "gst": "GST (18%)",
+    "total": "Grand Total",
+    "checkout": "Finalize Checkout",
+    "terminal_id": "Terminal ID"
+  },
+  "inventory": {
+    "title": "Product Stock",
+    "subtitle": "Manage and track your supermarket inventory.",
+    "product_detail": "Product Detail",
+    "category": "Category",
+    "pricing": "Pricing",
+    "stock_status": "Stock Status"
+  },
+  "staff": {
+    "title": "Team Directory",
+    "subtitle": "Manage personnel profiles and permissions.",
+    "employee": "Employee",
+    "role": "Role",
+    "contact": "Contact"
+  },
+  "wastage": {
+    "title": "Wastage Tracker",
+    "subtitle": "Monitor losses, expiry, and spoiled inventory."
+  },
+  "settings": {
+    "title": "System Settings",
+    "subtitle": "Manage your profile, security, and application preferences.",
+    "personal_workspace": "Personal Workspace",
+    "security_data": "Security & Data",
+    "language": "Language",
+    "appearance": "Appearance",
+    "profile": "Profile Information",
+    "notifications": "Notifications",
+    "privacy": "Privacy & Security",
+    "data_mgmt": "Data Management"
+  }
+}
