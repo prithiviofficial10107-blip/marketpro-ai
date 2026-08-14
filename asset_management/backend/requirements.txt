@@ -12,3 +12,4 @@ python-dotenv==1.0.1
 Werkzeug==3.1.8
 openai==1.57.0
 sqlparse==0.5.0
+Flask-SQLAlchemy
