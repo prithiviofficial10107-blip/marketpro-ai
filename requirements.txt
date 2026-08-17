@@ -6,3 +6,4 @@ openai==1.57.0
 python-dotenv==1.0.1
 gunicorn
 Flask-SQLAlchemy==3.0.5
+Flask-JWT-Extended==4.7.1
