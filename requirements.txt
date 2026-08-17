@@ -3,10 +3,11 @@ Flask-SQLAlchemy
 Flask-JWT-Extended
 Flask-Cors
 Flask-Migrate
+Flask-Limiter
 mysql-connector-python
 python-dotenv
+gunicorn
 pandas
 numpy
 plotly
 openai
-gunicorn
