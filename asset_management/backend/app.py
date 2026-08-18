@@ -82,7 +82,10 @@ def create_app(config_class=Config):
 
     return app
 
+# Gunicorn expects a module-level variable named `app`.
+# Keep the factory for local code while exposing a production-ready object.
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     # Listen on 0.0.0.0 to allow access from local machine and Android emulator
     app.run(debug=True, host='0.0.0.0', port=5001)
