@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 from backend.config import Config
 from backend.extensions import db, jwt, cors, migrate, ma, limiter
@@ -13,9 +14,9 @@ def create_app(config_class=Config):
     # Initialize extensions
     db.init_app(app)
     jwt.init_app(app)
-    # Single robust CORS initialization
+    allowed_origins = getattr(app.config, 'CORS_ORIGINS', ['http://localhost:5173'])
     cors.init_app(app, resources={r"/api/*": {
-        "origins": ["*"],
+        "origins": allowed_origins,
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True
@@ -60,9 +61,10 @@ def create_app(config_class=Config):
 
     @app.route('/')
     def root_redirect():
-        """Smart Redirect: Automatically send browser users to the React Dashboard"""
+        """Smart Redirect: Automatically send browser users to the configured frontend."""
         from flask import redirect
-        return redirect('http://127.0.0.1:5173')
+        frontend_url = app.config.get('FRONTEND_URL', 'http://localhost:5173')
+        return redirect(frontend_url)
 
     @app.route('/api/health')
     def health_check():
