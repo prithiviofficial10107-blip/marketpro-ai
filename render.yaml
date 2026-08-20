@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: supermarket-ai-api
+    runtime: python
+    rootDir: asset_management
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT backend.app:app
+    healthCheckPath: /api/health

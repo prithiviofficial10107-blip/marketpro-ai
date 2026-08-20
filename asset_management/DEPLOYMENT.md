@@ -1,9 +1,21 @@
 # Deployment Guide (Production)
 
-## 1. Backend (Gunicorn/Nginx)
-1. Use Gunicorn as the WSGI server: `gunicorn -w 4 -b 0.0.0.0:5001 "backend.app:create_app()"`.
-2. Configure Nginx as a reverse proxy for port 5001.
-3. Ensure `Config.DEBUG = False` in production.
+## 1. Backend (Render/Gunicorn)
+For a Render web service, use these settings:
+
+- **Root Directory:** `asset_management`
+- **Build Command:** `pip install -r backend/requirements.txt`
+- **Start Command:** `gunicorn --bind 0.0.0.0:$PORT backend.app:app`
+- **Health Check Path:** `/api/health`
+
+The root directory is important because `backend/app.py` uses imports such as
+`from backend.config import Config`. Running `app:app` from `backend/` makes
+Python look for a top-level `backend` package that is not on its import path.
+
+For a local/server environment where the port is fixed, use:
+`gunicorn -w 4 -b 0.0.0.0:5001 backend.app:app` from `asset_management/`.
+
+Ensure `Config.DEBUG = False` in production.
 
 ## 2. Frontend (Vite Build)
 1. Run `npm run build` in the `frontend/` directory.
