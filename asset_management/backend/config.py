@@ -14,7 +14,7 @@ if not _db_url or any(p in _db_url.lower() for p in _placeholders):
 else:
     DATABASE_URL_FINAL = _db_url
 
-_frontend_origins = os.environ.get('CORS_ORIGINS') or os.environ.get('FRONTEND_URL') or 'http://localhost:5173,http://127.0.0.1:5173'
+_frontend_origins = os.environ.get('CORS_ORIGINS') or os.environ.get('FRONTEND_URL') or 'https://marketpro-ai-k36n-two.vercel.app,http://localhost:5173,http://127.0.0.1:5173'
 CORS_ORIGINS = [origin.strip() for origin in _frontend_origins.split(',') if origin.strip()]
 
 class Config:

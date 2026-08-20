@@ -14,8 +14,8 @@ def create_app(config_class=Config):
     # Initialize extensions
     db.init_app(app)
     jwt.init_app(app)
-    allowed_origins = getattr(app.config, 'CORS_ORIGINS', ['http://localhost:5173'])
-    cors.init_app(app, resources={r"/api/*": {
+    allowed_origins = app.config.get('CORS_ORIGINS', ['http://localhost:5173'])
+    cors.init_app(app, resources={r"/api/.*": {
         "origins": allowed_origins,
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],

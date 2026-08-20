@@ -28,3 +28,8 @@ Ensure `Config.DEBUG = False` in production.
 
 ## 4. Environment Variables
 - Set all keys (`SECRET_KEY`, `OPENROUTER_API_KEY`, etc.) as secure environment variables on your host.
+- Set `CORS_ORIGINS=https://marketpro-ai-k36n-two.vercel.app` on Render.
+- Set `FRONTEND_URL=https://marketpro-ai-k36n-two.vercel.app` on Render.
+
+The backend already reads `CORS_ORIGINS` and passes it to Flask-CORS. Do not
+include the frontend route `/login` in the origin value.

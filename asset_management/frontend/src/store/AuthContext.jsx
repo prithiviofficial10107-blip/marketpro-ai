@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      // Use the api instance which has the baseURL set to http://localhost:5001/api
       const response = await api.get('/auth/me/');
       if (response.data && response.data.data) {
         setUser(response.data.data);
