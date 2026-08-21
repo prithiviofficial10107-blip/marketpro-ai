@@ -14,8 +14,11 @@ if not _db_url or any(p in _db_url.lower() for p in _placeholders):
 else:
     DATABASE_URL_FINAL = _db_url
 
-_frontend_origins = os.environ.get('CORS_ORIGINS') or os.environ.get('FRONTEND_URL') or 'https://marketpro-ai-k36n-two.vercel.app,http://localhost:5173,http://127.0.0.1:5173'
-CORS_ORIGINS = [origin.strip() for origin in _frontend_origins.split(',') if origin.strip()]
+_frontend_origins = os.environ.get('CORS_ORIGINS') or os.environ.get('FRONTEND_URL') or 'http://localhost:5173,http://127.0.0.1:5173'
+CORS_ORIGINS = [
+    'https://marketpro-ai-five.vercel.app',
+    *[origin.strip() for origin in _frontend_origins.split(',') if origin.strip()]
+]
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
@@ -23,7 +26,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'jwt-dev-secret')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=2)
-    CORS_ORIGINS = CORS_ORIGINS
+    CORS_ORIGINS = list(dict.fromkeys(CORS_ORIGINS))
     FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
 
     # OpenRouter Config (Synced with root .env)

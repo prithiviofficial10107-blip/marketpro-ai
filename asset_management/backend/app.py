@@ -17,7 +17,7 @@ def create_app(config_class=Config):
     allowed_origins = app.config.get('CORS_ORIGINS', ['http://localhost:5173'])
     cors.init_app(app, resources={r"/api/.*": {
         "origins": allowed_origins,
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True
     }})
